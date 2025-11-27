@@ -18,11 +18,27 @@ const observer = new MutationObserver((mutations) => {
   });
 });
 
-// Démarrer l'observation du DOM
-observer.observe(document.body, {
-  childList: true,
-  subtree: true
-});
+// Démarrer l'observation du DOM une fois que le body est disponible
+function startObserving() {
+  if (document.body) {
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+    console.log('Subtitle Downloader: Observation du DOM démarrée');
+  } else {
+    // Si le body n'est pas encore disponible, attendre
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', startObserving);
+    } else {
+      // Fallback: attendre un court instant
+      setTimeout(startObserving, 100);
+    }
+  }
+}
+
+// Démarrer l'observation
+startObserving();
 
 // Écouter les messages du background ou du popup
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
