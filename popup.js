@@ -172,9 +172,24 @@ function truncateUrl(url, maxLength) {
   return url.substring(0, maxLength) + '...';
 }
 
+// Fonction pour actualiser (recharger la page)
+async function refreshPage() {
+  try {
+    // Recharger l'onglet actuel
+    await chrome.tabs.reload(currentTabId);
+
+    // Attendre un peu puis recharger les sous-titres
+    setTimeout(() => {
+      loadSubtitles();
+    }, 500);
+  } catch (error) {
+    console.error('Erreur lors de l\'actualisation:', error);
+  }
+}
+
 // Événements
 downloadAllBtn.addEventListener('click', downloadAll);
-refreshBtn.addEventListener('click', loadSubtitles);
+refreshBtn.addEventListener('click', refreshPage);
 clearBtn.addEventListener('click', clearSubtitles);
 
 // Initialiser au chargement
