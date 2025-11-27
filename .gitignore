@@ -1,0 +1,32 @@
+# Fichiers système
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Environnements Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# Fichiers temporaires
+*.log
+*.tmp
+
+# Archives
+*.zip
+*.crx
+*.pem
+
+# Node modules (si vous ajoutez des outils de build plus tard)
+node_modules/
+package-lock.json
